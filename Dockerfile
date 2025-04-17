@@ -1,7 +1,11 @@
-FROM node:20-alpine
+FROM node:20.16.0-alpine
 
 # 设置工作目录
 WORKDIR /app
+
+
+# 安装pnpm
+RUN npm install -g pnpm
 
 # 安装 PM2
 RUN npm install pm2 -g
@@ -10,7 +14,7 @@ RUN npm install pm2 -g
 COPY package*.json ./
 
 # 安装依赖
-RUN npm install
+RUN pnpm install
 
 # 复制所有源代码
 COPY . .
